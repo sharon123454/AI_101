@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2854500008270690429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6590731551185338374}
+  - component: {fileID: 5151395410818835647}
+  m_Layer: 7
+  m_Name: Detector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6590731551185338374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2854500008270690429}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5860014841136293924}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5151395410818835647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2854500008270690429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a5524fa383ef64ca8ced70e6319db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectorOffset: {x: 0, y: 0}
+  detectionDelay: 0.5
+  detectorSize: 5
+  detectionTag:
+    serializedVersion: 2
+    m_Bits: 64
+  GizmoIdleColor: {r: 1, g: 0, b: 0, a: 0.5019608}
+  GizmoDetectedColor: {r: 0, g: 1, b: 0, a: 0.5019608}
+  GizmoEnabled: 1
 --- !u!1 &5860014841136293928
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +85,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8794856542393706390}
+  - {fileID: 6590731551185338374}
+  - {fileID: 5067911209312734605}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,7 +105,6 @@ MonoBehaviour:
   _ShotPrefab: {fileID: 7981359862691316585, guid: c865e4c2a78f3fb48b31db5e1fea209d, type: 3}
   _ShootingPoint: {fileID: 8794856543324943067}
   _Visual: {fileID: 8794856542393706390}
-  _DetectionCollider: {fileID: 7204774599628070746}
   _CooldownTime: 0.5
   _Speed: 5
   _ChaseSpeedMulti: 1.25
@@ -65,7 +119,9 @@ MonoBehaviour:
   - {x: 0, y: -3, z: 0}
   - {x: 5, y: -3, z: 0}
   _currentState: 0
-  _canFire: 0
+  _playerDetector: {fileID: 5151395410818835647}
+  _weaponDetector: {fileID: 2785853170829468138}
+  _isRememberingPlayer: 0
 --- !u!60 &5860014841136293926
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -127,6 +183,59 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!1 &7447401672164245492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5067911209312734605}
+  - component: {fileID: 2785853170829468138}
+  m_Layer: 7
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5067911209312734605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7447401672164245492}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5860014841136293924}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2785853170829468138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7447401672164245492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a5524fa383ef64ca8ced70e6319db8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectorOffset: {x: 0, y: 0}
+  detectionDelay: 0.5
+  detectorSize: 3
+  detectionTag:
+    serializedVersion: 2
+    m_Bits: 64
+  GizmoIdleColor: {r: 0, g: 1, b: 0, a: 0.5019608}
+  GizmoDetectedColor: {r: 1, g: 0, b: 0, a: 0.5019608}
+  GizmoEnabled: 1
 --- !u!1001 &5225223104568086489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,17 +297,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c94950344c34853469364f11d9359424, type: 3}
---- !u!114 &7204774599628070746 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3134286442313240707, guid: c94950344c34853469364f11d9359424, type: 3}
-  m_PrefabInstance: {fileID: 5225223104568086489}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78a5524fa383ef64ca8ced70e6319db8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8794856542393706390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3642888555720894543, guid: c94950344c34853469364f11d9359424, type: 3}

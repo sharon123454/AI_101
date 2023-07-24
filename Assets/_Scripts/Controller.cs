@@ -34,12 +34,12 @@ public class Controller : MonoBehaviour
         obj.rotation = Quaternion.RotateTowards(obj.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
     }
 
-    public static void Attack(Transform obj, Transform shootingPoint, GameObject shotPrefab)
+    public static void Attack(Transform firingUnit, Transform shootingPoint, GameObject shotPrefab)
     {
         if (shootingPoint && shotPrefab)
         {
-            GameObject bulletGO = Instantiate(shotPrefab, shootingPoint.position, obj.rotation);
-            bulletGO.layer = obj.gameObject.layer;
+            GameObject bulletGO = Instantiate(shotPrefab, shootingPoint.position, firingUnit.rotation);
+            bulletGO.layer = firingUnit.gameObject.layer;
         }
     }
 

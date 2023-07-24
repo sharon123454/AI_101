@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4838616301991530778}
   - component: {fileID: 4838616301991530779}
   m_Layer: 6
-  m_Name: Merchant
+  m_Name: AI_Merchant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
