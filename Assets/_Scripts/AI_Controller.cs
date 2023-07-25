@@ -42,6 +42,7 @@ public class AI_Controller : MonoBehaviour
     //}
     #endregion
 
+    private Coroutine _resetPlayer;
     private WaitForSeconds _waitXSexonds;
     private Transform _targetTransform;
     private Vector3 _moveDirection;
@@ -85,7 +86,7 @@ public class AI_Controller : MonoBehaviour
         switch (_currentState)
         {
             case StateMachine.Idle:
-                if (_targetTransform && Vector2.Distance(transform.position, _targetTransform.position) < _ShootingRange)
+                if (_targetTransform)
                 {
                     SetState(StateMachine.Chase);
                 }
@@ -95,10 +96,10 @@ public class AI_Controller : MonoBehaviour
                 {
                     Controller.Rotate(_Visual, _targetTransform.position, _rotationSpeed, _minDisToRotate);
                     Controller.MoveToTarget(transform, _targetTransform.position, _speed * _chaseSpeedMulti);
-                }
-                else
-                {
-                    SetState(StateMachine.Idle);
+
+                    if (Vector2.Distance(transform.position, _targetTransform.position) > _ShootingRange)
+                        if (_resetPlayer == null)
+                            _resetPlayer = StartCoroutine(ResetTarget());
                 }
                 break;
             case StateMachine.OnAlert:
@@ -115,7 +116,7 @@ public class AI_Controller : MonoBehaviour
         switch (_currentState)
         {
             case StateMachine.Patrol:
-                if (_targetTransform)//if target found
+                if (_targetTransform)
                 {
                     SetState(StateMachine.Chase);
                 }
@@ -152,16 +153,25 @@ public class AI_Controller : MonoBehaviour
                 if (_targetTransform)
                 {
                     SetState(StateMachine.OnAlert);
+
+                    Collider2D[] hunterColliders = Physics2D.OverlapCircleAll(transform.position, _ShootingRange * 5);
+                    foreach (Collider2D collider in hunterColliders)
+                    {
+                        AI_Controller aIInRange = collider.gameObject.GetComponent<AI_Controller>();
+                        if (aIInRange)
+                            if (aIInRange._type == Type.Hunter)
+                                aIInRange.playerDetector_SetTarget(this, _targetTransform);
+                    }
                 }
                 break;
             case StateMachine.OnAlert:
                 if (_targetTransform)
                 {
                     Controller.Rotate(_Visual, _targetTransform.position, _rotationSpeed, _minDisToRotate);
-                }
-                else
-                {
-                    SetState(StateMachine.Idle);
+
+                    if (Vector2.Distance(transform.position, _targetTransform.position) > _ShootingRange)
+                        if (_resetPlayer == null)
+                            _resetPlayer = StartCoroutine(ResetTarget());
                 }
                 break;
             case StateMachine.Scavenge:
@@ -212,7 +222,7 @@ public class AI_Controller : MonoBehaviour
             case StateMachine.Idle:
                 _moveDirection = Vector3.zero;
                 SetDestination(transform.position);
-                StartCoroutine(LosePlayer());
+                _resetPlayer = StartCoroutine(ResetTarget());
                 break;
             case StateMachine.Patrol:
             case StateMachine.OnAlert:
@@ -224,10 +234,11 @@ public class AI_Controller : MonoBehaviour
                 break;
         }
     }
-    private IEnumerator LosePlayer()
+    private IEnumerator ResetTarget()
     {
         yield return _waitXSexonds;
         _targetTransform = null;
+        _resetPlayer = null;
     }
 
     private IEnumerator Patrol()

@@ -80,6 +80,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5860014841136293925, guid: db0a18b4d8b5c52468110615a68134b5, type: 3}
+      propertyPath: _TimeToLosePlayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860014841136293925, guid: db0a18b4d8b5c52468110615a68134b5, type: 3}
       propertyPath: _isRememberingPlayer
       value: 1
       objectReference: {fileID: 0}
