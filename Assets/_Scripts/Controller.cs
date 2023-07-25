@@ -12,7 +12,7 @@ public class Controller : MonoBehaviour
         obj.Translate(moveDirection * Time.deltaTime * speed);
     }
 
-    public static void MoveObjToPosition(Transform obj, Vector3 position, float speed)
+    public static void MoveToTarget(Transform obj, Vector3 position, float speed)
     {
         if (!obj || position == obj.position) { return; }
 
@@ -31,7 +31,7 @@ public class Controller : MonoBehaviour
 
         Quaternion desiredRotation = Quaternion.Euler(0, 0, zRotateAngle);
 
-        obj.rotation = Quaternion.RotateTowards(obj.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
+        obj.rotation = Quaternion.RotateTowards(obj.rotation, desiredRotation, rotationSpeed * Time.deltaTime * 100);
     }
 
     public static void Attack(Transform firingUnit, Transform shootingPoint, GameObject shotPrefab)
