@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: detectorSize
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 5151395410818835647, guid: db0a18b4d8b5c52468110615a68134b5, type: 3}
+      propertyPath: detectorSize
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5860014841136293924, guid: db0a18b4d8b5c52468110615a68134b5, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -72,7 +76,15 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5860014841136293925, guid: db0a18b4d8b5c52468110615a68134b5, type: 3}
+      propertyPath: _TimeToLosePlayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860014841136293925, guid: db0a18b4d8b5c52468110615a68134b5, type: 3}
       propertyPath: _isRememberingPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860014841136293925, guid: db0a18b4d8b5c52468110615a68134b5, type: 3}
+      propertyPath: _isRememberingTarget
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5860014841136293928, guid: db0a18b4d8b5c52468110615a68134b5, type: 3}
